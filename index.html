@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="" />
+</head>
+
+<body>
+
+    <h2>Location Info - By Henry21</h2>
+    <h2>Local time:</h2>
+    <h1 id="time"> </h1>
+
+    <div class="box">
+        <h2>IP:</h2>
+        <h2 id="ip"> </h2>
+    </div>
+
+    <div class="box">
+        <h2>Zip Code:</h2>
+        <h2 id="zip"> </h2>
+    </div>
+
+    <div class="box">
+        <h2>Location:</h2>
+        <h2 id="location"> </h2>
+    </div>
+    
+    <div class="box">
+        <h2>Cords:</h2>
+        <h2 id="cords"> </h2>
+    </div>
+
+    <h2>Info</h2>
+    <p>Location Info is a website created to put all your web info neatly into one page. It's open source, so you can see the code here:</p>
+
+
+</body>
+
+<style>
+
+    body {
+        background-color: lightblue;
+        border: solid #336bb7 16px;
+        border-radius: 5px;
+        
+    }
+
+    h1 {
+        font-family: monospace;
+        font-size: 75px;
+        text-align: center;
+        margin: 0;
+        
+    }
+    h2 {
+        font-family: monospace;
+        font-size: 25px;
+        text-align: center;
+    }
+
+    p {
+        font-size: 16px;
+        font-family: monospace;
+        text-align: center;
+    }
+
+    .box{
+        margin: 30px;
+        border: solid #336bb7 4px;
+        border-collapse: separate;
+        border-radius: 100px;
+    }
+    
+</style>
+
+<script>
+
+    function tick() {
+        var time = new Date();
+        var hours = time.getHours();
+        var minutes = time.getMinutes();
+        var seconds = time.getSeconds();
+        var fulltime = hours + ":" + minutes + ":" + seconds;
+        document.getElementById("time").innerHTML = fulltime; 
+        document.title = fulltime;
+        setTimeout(tick, 1000)
+    }
+
+    function json(url) {
+        return fetch(url).then(res => res.json());
+    }
+
+    let apiKey = '7fa2f57e6e0208db0551eaed0cff11a293777e1a4af6ee6492d68c5c';
+    json(`https://api.ipdata.co?api-key=${apiKey}`).then(data => {
+        document.getElementById("cords").innerHTML = data.longitude + ", " + data.latitude; 
+        document.getElementById("ip").innerHTML = data.ip; 
+        document.getElementById("zip").innerHTML = data.postal;
+        document.getElementById("location").innerHTML = data.city + ", " + data.region +  ", " + data.country_name + ", " + data.continent_name; 
+    });
+
+    function showPosition(position) {
+        document.getElementById("cords").innerHTML = "Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude;
+    }
+
+    tick()
+</script>
+</html>
