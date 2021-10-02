@@ -7,7 +7,7 @@
 </head>
 
 <body>
-
+    
     <h2>Location Info - By Henry21</h2>
     <h2>Local time:</h2>
     <h1 id="time"> </h1>
@@ -54,14 +54,14 @@
 
     h1 {
         font-family: monospace;
-        font-size: 75px;
+        font-size: 5vw;
         text-align: center;
         margin: 0;
         
     }
     h2 {
         font-family: monospace;
-        font-size: 25px;
+        font-size: 1.5vw;
         text-align: center;
     }
 
@@ -94,7 +94,7 @@
 </style>
 
 <script>
-
+    document.title = "Location Info";
     function tick() {
         var time = new Date();
         var hours = time.getHours();
@@ -102,7 +102,6 @@
         var seconds = time.getSeconds();
         var fulltime = hours + ":" + minutes + ":" + seconds;
         document.getElementById("time").innerHTML = fulltime; 
-        document.title = fulltime;
         setTimeout(tick, 1000)
     }
 
